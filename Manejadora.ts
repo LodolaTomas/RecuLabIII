@@ -79,10 +79,8 @@ namespace RecuperatorioPrimerParcial {
                 async: true,
             }).done(function (retJSON) {
                 let respuesta= JSON.parse(retJSON);
-                if (respuesta.exito) {
-                    alert(respuesta.mensaje);
-                    console.log(respuesta.mensaje);
-                }
+                    alert(respuesta.mensaje+JSON.stringify(respuesta.masPopulares));
+                    console.log(respuesta);
             }).fail(function (jqXHR, textStatus, errorThrown) {
                 alert(jqXHR.responseText + "\n" + textStatus + "\n" + errorThrown);
             });

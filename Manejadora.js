@@ -1,16 +1,3 @@
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 /// <reference path="./node_modules/@types/jquery/index.d.ts" />
 var RecuperatorioPrimerParcial;
 (function (RecuperatorioPrimerParcial) {
@@ -84,10 +71,8 @@ var RecuperatorioPrimerParcial;
                 async: true
             }).done(function (retJSON) {
                 var respuesta = JSON.parse(retJSON);
-                if (respuesta.exito) {
-                    alert(respuesta.mensaje);
-                    console.log(respuesta.mensaje);
-                }
+                alert(respuesta.mensaje + JSON.stringify(respuesta.masPopulares));
+                console.log(respuesta);
             }).fail(function (jqXHR, textStatus, errorThrown) {
                 alert(jqXHR.responseText + "\n" + textStatus + "\n" + errorThrown);
             });
@@ -324,55 +309,3 @@ var RecuperatorioPrimerParcial;
     }());
     RecuperatorioPrimerParcial.Manejadora = Manejadora;
 })(RecuperatorioPrimerParcial || (RecuperatorioPrimerParcial = {}));
-var Entidades;
-(function (Entidades) {
-    var Receta = /** @class */ (function () {
-        function Receta(id, nombre, poblacion, pais, foto) {
-            this.id = id;
-            this.nombre = nombre;
-            this.ingredientes = poblacion;
-            this.tipo = pais;
-            this.foto = foto;
-        }
-        Receta.prototype.ToJSON = function () {
-            var retornoJSON = "{\"id\":\"" + this.id + "\",\"nombre\":\"" + this.nombre + "\",\"ingredientes\":\"" + this.ingredientes + "\",\"tipo\":\"" + this.tipo + "\",\"foto\":\"" + this.foto + "\"}";
-            return JSON.parse(retornoJSON);
-        };
-        return Receta;
-    }());
-    Entidades.Receta = Receta;
-})(Entidades || (Entidades = {}));
-var Entidades;
-(function (Entidades) {
-    var Persona = /** @class */ (function () {
-        function Persona(email, clave) {
-            this.clave = clave;
-            this.email = email;
-        }
-        Persona.prototype.ToString = function () {
-            var person = JSON.stringify({ email: this.email, clave: this.clave });
-            return person.toString();
-        };
-        return Persona;
-    }());
-    Entidades.Persona = Persona;
-})(Entidades || (Entidades = {}));
-///<reference path="Persona.ts"/>
-var Entidades;
-(function (Entidades) {
-    var Cocinero = /** @class */ (function (_super) {
-        __extends(Cocinero, _super);
-        function Cocinero(email, clave, especialidad) {
-            var _this = _super.call(this, email, clave) || this;
-            _this.especialidad = especialidad;
-            return _this;
-        }
-        Cocinero.prototype.ToJSON = function () {
-            var cocinero = JSON.parse(_super.prototype.ToString.call(this));
-            cocinero["especialidad"] = this.especialidad;
-            return cocinero;
-        };
-        return Cocinero;
-    }(Entidades.Persona));
-    Entidades.Cocinero = Cocinero;
-})(Entidades || (Entidades = {}));
